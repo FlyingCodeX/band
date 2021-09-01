@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bandmbg.mapper.BandMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.bandmbg.entity.Band">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="members" property="members" />
+        <result column="religion" property="religion" />
+        <result column="style" property="style" />
+        <result column="company" property="company" />
+        <result column="create_time" property="createTime" />
+        <result column="album" property="album" />
+        <result column="introduction" property="introduction" />
+        <result column="vblog" property="vblog" />
+        <result column="imagine" property="imagine" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, members, religion, style, company, create_time, album, introduction, vblog, imagine
+    </sql>
+
+</mapper>
