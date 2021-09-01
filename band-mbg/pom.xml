@@ -30,6 +30,16 @@
 <!--            <scope>test</scope>-->
 <!--        </dependency>-->
         <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-core</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
@@ -55,6 +65,11 @@
         <dependency>
             <groupId>com.xiefei</groupId>
             <artifactId>band-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xiefei</groupId>
+            <artifactId>band-config</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

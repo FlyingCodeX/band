@@ -1,5 +1,8 @@
-package com.example.bandmbg.entity;
+package com.xiefei.bandportal.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDate;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -17,11 +20,14 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="BwUser对象", description="")
-public class BwUser implements Serializable {
+@TableName("bw_user")
+@ApiModel(value="User对象", description="")
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "id")
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty(value = "用户名")
@@ -56,6 +62,9 @@ public class BwUser implements Serializable {
 
     @ApiModelProperty(value = "用户头像")
     private String imgine;
+
+    @ApiModelProperty(value = "用户性别")
+    private String sex;
 
 
 }
