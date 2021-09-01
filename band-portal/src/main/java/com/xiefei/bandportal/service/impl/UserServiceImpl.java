@@ -27,7 +27,7 @@ import java.util.Random;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     @Autowired
-    RedisService redisService;
+    private RedisService redisService;
 
     @Override
     public int register(User user,String authCode) {
