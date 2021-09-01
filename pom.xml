@@ -11,6 +11,7 @@
 
     <modules>
         <module>band-mbg</module>
+        <module>band-portal</module>
     </modules>
 
     <parent>

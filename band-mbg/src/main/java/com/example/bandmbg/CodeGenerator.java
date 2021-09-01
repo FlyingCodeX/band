@@ -23,8 +23,8 @@ public class CodeGenerator {
         gc.setSwagger2(true);
         gc.setBaseResultMap(true);
         gc.setBaseColumnList(true);
-        gc.setServiceName("%Service");
-        gc.setServiceImplName("%ServiceImpl");
+//        gc.setServiceName("%Service");
+//        gc.setServiceImplName("%ServiceImpl");
         autoGenerator.setGlobalConfig(gc);
         //数据库设置
         DataSourceConfig dc = new DataSourceConfig();
@@ -35,28 +35,20 @@ public class CodeGenerator {
         autoGenerator.setDataSource(dc);
         //包设置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.example.bandmbg.entity");
+        pc.setModuleName(null);
+        pc.setParent("com.example.bandmbg");
+        pc.setController("controller");
+        pc.setService("service");
+        pc.setEntity("entity");
+        pc.setMapper("mapper");
         autoGenerator.setPackageInfo(pc);
-
 
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        strategy.setTablePrefix("bw_");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
-
-        TemplateConfig templateConfig = new TemplateConfig();
-        templateConfig.setService("");
-        templateConfig.setServiceImpl("");
-        templateConfig.setController("");
-        autoGenerator.setTemplate(templateConfig);
-        // 公共父类
-//        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
-        // 写于父类中的公共字段
-        strategy.setSuperEntityColumns("id");
-
-        strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "_");
         autoGenerator.setStrategy(strategy);
         autoGenerator.setTemplateEngine(new FreemarkerTemplateEngine());
         autoGenerator.execute();
