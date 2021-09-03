@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author AutoGenerator
- * @since 2021-09-01
+ * @since 2021-09-03
  */
 @Service
 public class BandServiceImpl extends ServiceImpl<BandMapper, Band> implements IBandService {

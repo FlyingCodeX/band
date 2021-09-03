@@ -9,10 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author AutoGenerator
- * @since 2021-09-01
+ * @since 2021-09-03
  */
 public interface IUserService extends IService<User> {
-
-    int register(User user);
 
 }

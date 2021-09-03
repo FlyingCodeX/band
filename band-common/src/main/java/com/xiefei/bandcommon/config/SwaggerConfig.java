@@ -1,7 +1,7 @@
-package com.xiefei.bandconfig.config;
+package com.xiefei.bandcommon.config;
 
 
-import com.xiefei.bandconfig.domian.SwaggerProperties;
+import com.xiefei.bandcommon.domian.SwaggerProperties;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 

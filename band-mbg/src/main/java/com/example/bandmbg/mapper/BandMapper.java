@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author AutoGenerator
- * @since 2021-09-01
+ * @since 2021-09-03
  */
 public interface BandMapper extends BaseMapper<Band> {
 

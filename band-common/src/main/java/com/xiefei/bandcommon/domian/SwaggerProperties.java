@@ -1,4 +1,4 @@
-package com.xiefei.bandconfig.domian;
+package com.xiefei.bandcommon.domian;
 
 import lombok.Builder;
 import lombok.Data;

@@ -5,13 +5,19 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xiefei.bandcommon.exception.Asserts;
 import com.xiefei.bandcommon.service.RedisService;
 import com.xiefei.bandportal.entity.User;
+import com.xiefei.bandportal.mapper.RoleMapper;
 import com.xiefei.bandportal.mapper.UserMapper;
 import com.xiefei.bandportal.service.IUserService;
 import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.xiefei.bandcommon.dto.UserDTO;
+
+import java.lang.annotation.ElementType;
 import java.util.List;
 import java.util.Random;
 
@@ -25,13 +31,16 @@ import java.util.Random;
  * @since 2021-09-01
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService, UserDetailsService {
 
     @Autowired
     private RedisService redisService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private RoleMapper roleMapper;
+
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @Override
     public int register(UserDTO user, String authCode) {
@@ -53,7 +62,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         //如果没有,则进行注册
         User newUser = new User();
         newUser.setUsername(user.getUsername());
-        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        newUser.setPassword(user.getPassword());
         newUser.setNickname(user.getNickname());
         newUser.setTelephone(user.getTelephone());
         newUser.setSex(user.getSex());
@@ -73,5 +82,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         //存入redis缓存中
         redisService.set(telePhone,authCode);
         return authCode;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        List<User> users = baseMapper.getUserByUsername(s);
+
+        if(users.size()==0){
+            throw new UsernameNotFoundException("该用户不存在！");
+        }
+        else {
+            users.get(0).setRoles(roleMapper.getRoleByUserId(users.get(0).getId()));
+        }
+        return null;
     }
 }

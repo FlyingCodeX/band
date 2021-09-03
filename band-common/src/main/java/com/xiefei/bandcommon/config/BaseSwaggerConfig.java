@@ -1,6 +1,6 @@
-package com.xiefei.bandconfig.config;
+package com.xiefei.bandcommon.config;
 
-import com.xiefei.bandconfig.domian.SwaggerProperties;
+import com.xiefei.bandcommon.domian.SwaggerProperties;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;

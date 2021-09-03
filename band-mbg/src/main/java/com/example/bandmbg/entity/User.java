@@ -1,7 +1,9 @@
 package com.example.bandmbg.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import java.time.LocalDate;
+import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author AutoGenerator
- * @since 2021-09-01
+ * @since 2021-09-03
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -24,6 +26,8 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "id")
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty(value = "用户名")
@@ -58,6 +62,9 @@ public class User implements Serializable {
 
     @ApiModelProperty(value = "用户头像")
     private String imgine;
+
+    @ApiModelProperty(value = "用户性别")
+    private String sex;
 
 
 }
