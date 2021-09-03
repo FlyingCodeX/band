@@ -19,7 +19,7 @@ public class SwaggerConfig extends BaseSwaggerConfig {
 
         return SwaggerProperties.builder()
                 .apiBasePackage("com.xiefei.bandportal.controller")
-                .title("摇滚乐迷网")
+                .title("Welcome")
                 .description("band后台相关接口文档")
                 .contactName("xiefei")
                 .version("1.0")

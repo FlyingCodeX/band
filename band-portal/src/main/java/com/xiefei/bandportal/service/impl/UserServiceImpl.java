@@ -9,8 +9,9 @@ import com.xiefei.bandportal.mapper.UserMapper;
 import com.xiefei.bandportal.service.IUserService;
 import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import com.xiefei.bandcommon.dto.UserDTO;
 import java.util.List;
 import java.util.Random;
 
@@ -29,25 +30,34 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Autowired
     private RedisService redisService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
-    public int register(User user,String authCode) {
-        if(!StringUtil.isNullOrEmpty(authCode)){
+    public int register(UserDTO user, String authCode) {
+        //校对验证码
+        if(StringUtil.isNullOrEmpty(authCode)){
             Asserts.failed("验证码不能为空！");
         }
         String rightAuthCode = (String) redisService.get(user.getTelephone());
         if(!rightAuthCode.equals(authCode)){
             Asserts.failed("验证码错误！");
         }
-
         //首先查找数据库中有没有这个用户
         List<User> users = baseMapper.selectList(null);
         for(User u : users){
-            if (u.equals(user)){
-                return -1;
+            if (user.getTelephone().equals(u.getTelephone())){
+                Asserts.failed("该用户已存在");
             }
         }
         //如果没有,则进行注册
-        int insert = baseMapper.insert(user);
+        User newUser = new User();
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        newUser.setNickname(user.getNickname());
+        newUser.setTelephone(user.getTelephone());
+        newUser.setSex(user.getSex());
+        int insert = baseMapper.insert(newUser);
         return insert;
     }
 

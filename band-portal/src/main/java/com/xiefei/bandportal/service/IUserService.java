@@ -3,7 +3,7 @@ package com.xiefei.bandportal.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xiefei.bandportal.entity.User;
-
+import com.xiefei.bandcommon.dto.*;
 /**
  * <p>
  *  服务类
@@ -14,7 +14,7 @@ import com.xiefei.bandportal.entity.User;
  */
 public interface IUserService extends IService<User> {
 
-    int register(User user,String authCode);
+    int register(UserDTO user, String authCode);
 
     String getAuthCode(String telePhone);
 }
