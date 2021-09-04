@@ -17,4 +17,8 @@ public interface IUserService extends IService<User> {
     int register(UserDTO user, String authCode);
 
     String getAuthCode(String telePhone);
+
+    String login(String username,String password);
+
+    User getByUsername(String username);
 }

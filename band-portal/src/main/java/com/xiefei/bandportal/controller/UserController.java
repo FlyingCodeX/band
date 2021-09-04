@@ -6,6 +6,7 @@ import com.xiefei.bandportal.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,6 +28,9 @@ public class UserController {
     @Autowired
     IUserService userService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @ApiOperation(value = "用户注册接口")
     @GetMapping("/register")
     public CommonResult<UserDTO> register(UserDTO user, String authCode){
@@ -39,6 +43,13 @@ public class UserController {
     public CommonResult<String> getAuthCode(String telePhone){
         String authCode = userService.getAuthCode(telePhone);
         return CommonResult.success(authCode);
+    }
+
+    @ApiOperation(value = "用户登录")
+    @GetMapping("/login")
+    public CommonResult<String> login(String username,String password){
+//        userService
+        return CommonResult.success("登录成功");
     }
 
 
