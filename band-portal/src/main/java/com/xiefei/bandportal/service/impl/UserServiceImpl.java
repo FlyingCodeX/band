@@ -110,6 +110,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         try {
             //已经根据用户名查出用户了
             UserDetails userDetails = loadUserByUsername(username);
+            if(userDetails.equals(null)){
+                throw new BadCredentialsException("该用户不存在!");
+            }
+            //如果用户名和密码不匹配,则会被下面的catche捕捉
             if(!passwordEncoder.matches(password,userDetails.getPassword())){
                 throw new BadCredentialsException("密码不正确");
             }
