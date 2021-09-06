@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xiefei.bandcommon.exception.Asserts;
 import com.xiefei.bandcommon.service.RedisService;
+import com.xiefei.bandcommon.util.JwtTokenUtil;
 import com.xiefei.bandportal.entity.User;
 import com.xiefei.bandportal.mapper.RoleMapper;
 import com.xiefei.bandportal.mapper.UserMapper;
@@ -18,6 +19,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -52,6 +54,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private PasswordEncoder passwordEncoder;
     @Autowired
     private IUserCacheService userCacheService;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
@@ -103,16 +107,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public String login(String username, String password) {
         String token = null;
-        //已经根据用户名查出用户了
-        UserDetails userDetails = loadUserByUsername(username);
-        if(!passwordEncoder.matches(password,userDetails.getPassword())){
-            throw new BadCredentialsException("密码不正确");
+        try {
+            //已经根据用户名查出用户了
+            UserDetails userDetails = loadUserByUsername(username);
+            if(!passwordEncoder.matches(password,userDetails.getPassword())){
+                throw new BadCredentialsException("密码不正确");
+            }
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            token = jwtTokenUtil.generateToken(userDetails);
         }
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-        SecurityContextHolderStrategy securityContextHolderStrategy;
-
-//        loadUserByUsername(username)
-        return null;
+        catch (AuthenticationException e){
+            LOGGER.error("登录异常:{}",e.getMessage());
+        }
+        return token;
     }
 
     @Override
@@ -124,6 +132,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("username",username);
+        wrapper.select("id","username","password","telephone","nickname","city","create_time","birthday","favorite_style","favorite_band","status","imgine","sex");
         user = baseMapper.selectOne(wrapper);
         if(user!=null){
             return user;

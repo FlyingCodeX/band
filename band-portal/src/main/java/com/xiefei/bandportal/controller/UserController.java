@@ -48,8 +48,9 @@ public class UserController {
     @ApiOperation(value = "用户登录")
     @GetMapping("/login")
     public CommonResult<String> login(String username,String password){
+        String token = userService.login(username, password);
 //        userService
-        return CommonResult.success("登录成功");
+        return CommonResult.success(token);
     }
 
 

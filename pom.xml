@@ -46,6 +46,7 @@
         <mall-common.version>1.0-SNAPSHOT</mall-common.version>
         <mall-mbg.version>1.0-SNAPSHOT</mall-mbg.version>
         <mall-security.version>1.0-SNAPSHOT</mall-security.version>
+        <jjwt.version>0.9.1</jjwt.version>
     </properties>
 
 
@@ -127,6 +128,11 @@
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>{jjwt.version}</version>
             </dependency>
             <!--Mysql数据库驱动-->
             <dependency>

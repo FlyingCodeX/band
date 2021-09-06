@@ -75,17 +75,9 @@ public class User implements Serializable, UserDetails {
     @ApiModelProperty(value = "用户性别")
     private String sex;
 
-    @ApiModelProperty(value = "用户权限集合")
-    private List<Role> roles;
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-        for (Role role : roles){
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return authorities;
+        return null;
     }
 
     @Override
