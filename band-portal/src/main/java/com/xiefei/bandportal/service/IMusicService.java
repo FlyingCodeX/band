@@ -1,7 +1,8 @@
-package com.example.bandmbg.service;
+package com.xiefei.bandportal.service;
 
-import com.example.bandmbg.entity.User;
+
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xiefei.bandportal.entity.Music;
 
 /**
  * <p>
@@ -11,6 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author AutoGenerator
  * @since 2021-09-06
  */
-public interface IUserService extends IService<User> {
+public interface IMusicService extends IService<Music> {
 
 }

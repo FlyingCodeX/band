@@ -49,6 +49,7 @@ public class UserController {
     @GetMapping("/login")
     public CommonResult<String> login(String username,String password){
         String token = userService.login(username, password);
+
 //        userService
         return CommonResult.success(token);
     }

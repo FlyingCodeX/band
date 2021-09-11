@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author AutoGenerator
- * @since 2021-09-03
+ * @since 2021-09-06
  */
 @RestController
 @RequestMapping("/band")

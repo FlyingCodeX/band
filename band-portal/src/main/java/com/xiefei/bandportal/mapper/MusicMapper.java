@@ -1,7 +1,8 @@
-package com.example.bandmbg.mapper;
+package com.xiefei.bandportal.mapper;
 
-import com.example.bandmbg.entity.Band;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xiefei.bandportal.entity.Music;
 
 /**
  * <p>
@@ -11,6 +12,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author AutoGenerator
  * @since 2021-09-06
  */
-public interface BandMapper extends BaseMapper<Band> {
+public interface MusicMapper extends BaseMapper<Music> {
 
 }
